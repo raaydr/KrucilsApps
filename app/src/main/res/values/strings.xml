@@ -14,4 +14,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="field_empty">Tolong isi semua field.</string>
+
+    <string name="sendchat">Send</string>
 </resources>

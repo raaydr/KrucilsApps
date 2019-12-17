@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailKelas">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="fitXY" />
+        <TextView
+            android:id="@+id/judul_kelas"
+            android:layout_below="@id/image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="judult"/>
+        <TextView
+            android:id="@+id/detail_kelas"
+            android:layout_below="@id/judul_kelas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="element"/>
+        <TextView
+            android:id="@+id/detail_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/detail_kelas"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/spinner"
+            android:text="Tolong pilih Harga >>>"/>
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="169dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/detail_kelas"
+            android:layout_alignParentRight="true"
+            android:text="done" />
+        <TextView
+            android:id="@+id/detail_harga"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/spinner"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/harga_kelas"
+            android:text="Mater dan Grupchat"/>
+        <TextView
+            android:id="@+id/harga_kelas"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/spinner"
+            android:layout_alignParentRight="true"
+            android:text="500000"/>
+        <TextView
+            android:id="@+id/kelas_berlaku"
+            android:layout_below="@id/detail_harga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="element" />
+
+
+        <EditText
+            android:id="@+id/judul_materi"
+            android:layout_marginTop="100dp"
+            android:layout_below="@id/kelas_berlaku"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/checkbox_file"
+            android:hint="Judul materi" />
+
+        <Button
+            android:id="@+id/checkbox_file"
+            android:layout_marginTop="100dp"
+            android:layout_below="@id/kelas_berlaku"
+            android:text="Materi File"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            />
+        <Button
+            android:id="@+id/uncheckbox_file"
+            android:layout_marginTop="100dp"
+            android:layout_below="@id/kelas_berlaku"
+            android:text="Materi Link"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            />
+
+
+        <EditText
+            android:id="@+id/link_file"
+            android:gravity="center"
+            android:layout_marginBottom="50dp"
+            android:layout_below="@id/checkbox_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="www.krucils.co.id" />
+
+        <Button
+            android:id="@+id/btn_upload"
+            android:layout_below="@id/link_file"
+            android:text="Pilih File"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/btn_submit" />
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_below="@id/link_file"
+            android:text="Upload File"
+            android:layout_width="204dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_below="@id/btn_submit"
+            android:text="Hapus Kelas"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/btn_check" />
+        <Button
+            android:id="@+id/btn_check"
+            android:layout_below="@id/btn_submit"
+            android:text="Lihat Kelas"
+            android:layout_width="204dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -13,14 +13,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
+    FirebaseFirestore db;
     private FirebaseAuth mAuth;
     private TextView UsernameField, PassField, registerBtn;
     private Button loginBtn;
@@ -32,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login);
 
         mAuth = FirebaseAuth.getInstance();
-
+        db = FirebaseFirestore.getInstance();
         UsernameField=findViewById(R.id.input_email);
         PassField=findViewById(R.id.input_password);
         loginBtn= findViewById(R.id.btn_login);
@@ -51,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(LoginActivity.this, R.string.field_empty, Toast.LENGTH_SHORT).show();
                 }
+
             }
 
         });
@@ -85,13 +91,14 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Authentication success.",
                                     Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
-
+                            String currentuserUID = user.getUid();
                             //bikin pindah ke fragment yang tadi
                             //ini udah pake finish sih
 
                             //set result buat di cek di profil fragment
                             setResult(Activity.RESULT_OK);
-                            finish();
+                            getRole(currentuserUID);
+
 
                         } else {
                             try {
@@ -118,4 +125,60 @@ public class LoginActivity extends AppCompatActivity {
                 });
         // [END sign_in_with_email]
     }
+
+    private void getRole (String UID){
+
+        DocumentReference user = db.collection("users").document(UID);
+
+        user.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+
+            @Override
+
+            public void onComplete(@NonNull Task< DocumentSnapshot > task) {
+
+                if (task.isSuccessful()) {
+
+                    DocumentSnapshot doc = task.getResult();
+
+                    String role = (String) doc.getString("role");
+                    Boolean admin= doc.getBoolean("admin");
+
+
+
+
+                    getBeranda(admin);
+                }
+
+            }
+
+        })
+
+                .addOnFailureListener(new OnFailureListener() {
+
+                    @Override
+
+                    public void onFailure(@NonNull Exception e) {
+                        // ajaib ini
+
+
+                    }
+
+                });
+    }
+
+    private void getBeranda(boolean admin){
+
+        if (admin==true){
+
+            Intent adminLogin = new Intent(LoginActivity.this, BerandaAdmin.class);
+            LoginActivity.this.startActivity(adminLogin);
+
+            finish();
+        }else {
+            Intent userLogin = new Intent(LoginActivity.this, Beranda.class);
+            LoginActivity.this.startActivity(userLogin);
+            finish();
+        }
+    }
+
 }

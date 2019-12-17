@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Paket"
+            android:hint="judul"
             android:inputType="text" />
 
         <EditText
@@ -39,16 +39,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Harga"
-            android:inputType="number" />
+            android:hint="fileurl"
+            android:inputType="text" />
 
-        <EditText
-            android:id="@+id/tv_berlaku"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="DD/MM/YYYY"
-            android:inputType="date" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,6 +56,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="input" />
+
+            <Button
+                android:id="@+id/check"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="check" />
 
         </LinearLayout>
     </LinearLayout>

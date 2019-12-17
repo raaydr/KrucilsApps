@@ -48,10 +48,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Harga"
+            android:hint="Harga dengan Grup chat"
             android:inputType="number" />
 
         <EditText
+            android:id="@+id/kelas_harga2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Harga hanya materi"
+            android:inputType="number" />
+
+        <TextView
             android:id="@+id/kelas_mulai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,7 +73,12 @@
             android:orientation="horizontal">
 
 
-
+            <Button
+                android:id="@+id/datePick"
+                android:text="Choose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
             <Button
                 android:id="@+id/uImage"
                 android:text="Choose"
@@ -79,12 +92,16 @@
                 android:layout_weight="1"
                 android:text="upload" />
 
+
         </LinearLayout>
 
         <ImageView
             android:id="@+id/imgView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            />
+
+
 
     </LinearLayout>
 

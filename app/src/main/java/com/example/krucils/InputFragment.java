@@ -15,13 +15,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.krucils.objek.Materi;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -29,9 +38,12 @@ import java.util.UUID;
 
 public class InputFragment extends Fragment implements View.OnClickListener{
     private ProgressBar progressBar;
-    private EditText Paket, Harga, Berlaku;
-    private Button input;
+    private EditText judul, fileurl;
+    private Button input,check;
+    private ArrayList<Materi> materiList = new ArrayList<Materi>();
+    private ArrayList<Materi> ambilList = new ArrayList<Materi>();
     FirebaseFirestore db;
+
 
     @Nullable
     @Override
@@ -40,14 +52,16 @@ public class InputFragment extends Fragment implements View.OnClickListener{
 
         progressBar =v.findViewById(R.id.progress);
         progressBar.setVisibility(View.GONE);
-        Paket =(EditText)v.findViewById(R.id.tv_paket);
-        Harga = (EditText)v.findViewById((R.id.tv_harga));
-        Berlaku=(EditText) v.findViewById(R.id.tv_berlaku);
+        judul =(EditText)v.findViewById(R.id.tv_paket);
+        fileurl = (EditText)v.findViewById((R.id.tv_harga));
+
 
         db = FirebaseFirestore.getInstance();
 
         input = v.findViewById(R.id.input);
         input.setOnClickListener(this);
+        check=v.findViewById(R.id.check);
+        check.setOnClickListener(this);
 
 
         return v;
@@ -59,44 +73,55 @@ public class InputFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
 
-        //String paket = Paket.getText().toString();
-        String nama = Paket.getText().toString();
+            case R.id.input:
+            //String paket = Paket.getText().toString();
+            String nama = judul.getText().toString();
 
-        String harga = Harga.getText().toString();
+            String harga = fileurl.getText().toString();
 
-        String berlaku= Berlaku.getText().toString();
-        uploadPaket(nama,harga,berlaku);
-        Paket.setText(null);
-        Harga.setText(null);
-        Berlaku.setText(null);
+
+            uploadPaket(nama, harga);
+            judul.setText(null);
+            fileurl.setText(null);
+
+            break;
+
+            case R.id.check:
+
+                break;
 
         }
 
-    private void uploadPaket(String nama, String harga, String berlaku) {
-        String id = UUID.randomUUID().toString();
+        }
+
+    private void uploadPaket(String nama, String harga) {
+        Materi materi = new Materi();
+        materi.setJudul(nama);
+        materi.setFileurl(harga);
+
+        materiList.add(materi);
 
         Map<String, Object> doc = new HashMap<>();
 
-        doc.put("id",id);
-        doc.put("nama",nama);
-        doc.put("harga",harga);
-        doc.put("berlaku",berlaku);
 
-        db.collection("paket")
-                .document(id)
-                .set(doc)
+        doc.put("test",materiList);
+        doc.put("regions", Arrays.asList("test", "hebei"));
+
+
+
+
+        DocumentReference keranjangg = db.collection("paket")
+                .document("1");
+        keranjangg.update("regions", FieldValue.arrayUnion("greater_virginia"))
+
+
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
-                  @Override
-                  public void onSuccess(Void aVoid) {
-                      Toast.makeText(getActivity(), "upload", Toast.LENGTH_LONG).show();
-
-                  }
-              })
-                .addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getActivity(), "gagal", Toast.LENGTH_SHORT).show();
+                    public void onSuccess(Void aVoid) {
+
+
                     }
                 });
 

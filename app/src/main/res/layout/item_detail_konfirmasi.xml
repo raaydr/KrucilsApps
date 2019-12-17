@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:elevation="0dp"
+    app:cardCornerRadius="0dp">
+
+    <LinearLayout
+        android:id="@+id/list_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/judul_kelas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Main Dota bareng dengan Ricardo Milos" />
+
+            <TextView
+                android:id="@+id/detail_kelas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="dengan Marah gaming" />
+
+            <TextView
+                android:id="@+id/tanggal_kelas"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="30 mei 2018" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/harga_kelas"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="200.000" />
+
+    </LinearLayout>
+
+
+
+</FrameLayout>

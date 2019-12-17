@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_input_kelas"
+            android:icon="@drawable/ic_kelas"
+            android:title="InputKelas" />
+
+        <item
+            android:id="@+id/nav_input_materi"
+            android:icon="@drawable/ic_kelas"
+            android:title="InputMateri" />
+        <item
+            android:id="@+id/nav_konfirmasi"
+            android:icon="@drawable/ic_kelas"
+            android:title="Konfirmasi" />
+        <item
+            android:id="@+id/nav_create"
+            android:icon="@drawable/ic_profil"
+            android:title="CreateAdmin" />
+
+        <item
+            android:id="@+id/nav_beranda_admin"
+            android:icon="@drawable/ic_kelas"
+            android:title="Beranda" />
+
+
+        <item
+            android:id="@+id/nav_groupchat"
+            android:icon="@drawable/ic_profil"
+            android:title="Group Chat" />
+
+
+
+    </group>
+
+
+</menu>

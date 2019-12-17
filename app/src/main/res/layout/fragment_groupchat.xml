@@ -1,56 +1,40 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    android:weightSum="10">
+    android:weightSum="10" >
 
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/recyclerviewchat"
-    android:layout_height="0dp"
-    android:layout_weight = "8.5"
-    android:layout_width="match_parent"
-    tools:context=".ShoppingCartActivity" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewchat"
+        android:layout_height="0dp"
+        android:layout_weight = "8.5"
+        android:layout_width="match_parent" />
 
-<RelativeLayout
-android:layout_weight = "1.5"
-android:layout_width="match_parent"
-android:layout_height="0dp"
-android:layout_marginRight="10dp">
+    <RelativeLayout
+        android:layout_weight = "1.5"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginEnd="10dp">
 
-<TextView
-    android:id="@+id/total_tv"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true"
-    android:text="Total"
-    android:textSize="20sp"
-    android:textStyle="bold|italic" />
+        <EditText
+            android:layout_width="15dp"
+            android:layout_height="match_parent"
+            android:id="@+id/inputchatmessage"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/sendchat"/>
 
-<TextView
-    android:id="@+id/total_amount_tv"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentEnd="true"
-    android:layout_alignParentRight="true"
-    android:layout_alignTop="@+id/total_tv"
-    android:textSize="20sp"
-    android:text="Total Right"
-    android:textStyle="bold|italic" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignParentEnd="true"
+            android:text="@string/sendchat"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:id="@+id/sendchat"/>
 
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/total_amount_tv"
-    android:layout_alignParentEnd="true"
-    android:layout_alignParentRight="true"
-    android:onClick="onClickSendOrder"
-    android:text="Button"
-    android:textColor="@android:color/white"
-    android:textSize="20sp" />
-</RelativeLayout>
+    </RelativeLayout>
 
-    </LinearLayout>
+</LinearLayout>

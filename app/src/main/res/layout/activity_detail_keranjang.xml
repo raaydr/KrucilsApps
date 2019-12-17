@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DetailKeranjang">
+
+
+    <ImageView
+        android:id="@+id/thumbnail"
+
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitXY" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/atas_nama"
+            android:hint="Krucils Indonesia"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+
+            />
+        <EditText
+            android:id="@+id/bank"
+            android:hint="Mandiri"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/atas_nama"
+
+
+            />
+
+
+        <EditText
+            android:id="@+id/kodeRef"
+            android:layout_below="@+id/bank"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/btn_check"
+
+
+            />
+
+        <Button
+            android:id="@+id/btn_check"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/kodeRef"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="-39dp"
+            android:layout_marginRight="0dp"
+            android:text="Check"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_weight = "1.5"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginEnd="10dp">
+
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="177dp"
+            android:layout_height="72dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="35dp"
+            android:layout_toStartOf="@id/button"
+            android:text="Total : Rp. 100.000" />
+
+        <LinearLayout
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentEnd="true">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_alignParentEnd="true"
+                android:text="upload"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:id="@+id/btn_image"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bayar"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:id="@+id/btn_bayar"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

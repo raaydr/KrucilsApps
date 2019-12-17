@@ -2,6 +2,7 @@ package com.example.krucils;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
@@ -95,6 +97,20 @@ public class RegisterActivity extends AppCompatActivity{
 
                             FirebaseUser user = mAuth.getCurrentUser();
 
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(usernamefinal)
+                                    .build();
+
+                            user.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d(TAG, "User profile updated.");
+                                            }
+                                        }
+                                    });
+
 
                             //buat nginput sesuatu yang mantap gan
                             Map<String, Object> data = new HashMap<>();
@@ -103,6 +119,7 @@ public class RegisterActivity extends AppCompatActivity{
                             data.put("email", user.getEmail());
                             //todo coba cari cara buat manggil manual jangan di paksa gan
                             data.put("username", usernamefinal);
+                            data.put("admin", false);
 
                             //apply ke database
                             //masukin ke dalam document dengan judul UID di koleksi users

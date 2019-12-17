@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:orientation="vertical">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerViewDetailKonfirmasi"
+        android:scrollbars="vertical"
+        android:layout_height="0dp"
+        android:layout_weight = "3"
+        android:layout_width="match_parent"/>
+
+    <RelativeLayout
+        android:layout_weight = "1.5"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginEnd="10dp">
+
+        <TextView
+            android:id="@+id/username_tv"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Atago"/>
+        <TextView
+            android:id="@+id/atas_nama"
+            android:layout_below="@id/username_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bismarck"/>
+
+        <TextView
+            android:id="@+id/bank_tv"
+            android:layout_below="@id/atas_nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bank Monarch"/>
+        <TextView
+            android:id="@+id/harga_awal_tv"
+            android:layout_below="@id/bank_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1000"/>
+        <TextView
+            android:id="@+id/kodeRef"
+            android:layout_below="@id/harga_awal_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="9029"/>
+        <TextView
+            android:id="@+id/tanggal_upload"
+            android:layout_below="@id/kodeRef"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="30 mei 2018"/>
+        <TextView
+            android:id="@+id/harga_total"
+            android:layout_below="@id/tanggal_upload"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Rp 100.000"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/btn_setuju" />
+        <Button
+            android:id="@+id/btn_gambar"
+            android:layout_below="@id/tanggal_upload"
+            android:layout_marginTop="20dp"
+            android:text="Download bukti"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
+        <Button
+            android:id="@+id/btn_tolak"
+            android:layout_below="@id/btn_gambar"
+            android:text="tolak"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/btn_setuju" />
+        <Button
+            android:id="@+id/btn_setuju"
+            android:layout_below="@id/btn_gambar"
+            android:text="Setuju"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+</LinearLayout>
+
