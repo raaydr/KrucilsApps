@@ -44,7 +44,7 @@ public class InputFragment extends Fragment implements View.OnClickListener{
     private EditText judul, hargatest;
     private Button input,check;
     private String id;
-    private boolean stop = false;
+    private int start;
     private ArrayList<Materi> materiList = new ArrayList<Materi>();
     private ArrayList<Materi> ambilList = new ArrayList<Materi>();
     private static final String TAG = "check";
@@ -97,18 +97,12 @@ public class InputFragment extends Fragment implements View.OnClickListener{
             case R.id.check:
                 //Intent intent = new Intent(getContext(), Test_Activity.class);
                 //startActivity(intent);
-                String hargate = hargatest.getText().toString();
-                int start = Integer.parseInt(hargate);
-                //int start = 2;
-              /*  do {
-                    getUID(start);
-                    start = start + 1;
-                }
+                //String hargate = hargatest.getText().toString();
+                //int start = Integer.parseInt(hargate);
 
-                  while (stop == false);
-                */
-              getUID(start);
-
+                //start misalnya random
+                start = 2;
+                getUID(start);
                 break;
 
         }
@@ -171,7 +165,7 @@ public class InputFragment extends Fragment implements View.OnClickListener{
 
 
         db.collection("paket")
-                .document("2")
+                .document(id)
                 .set(doc)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -209,13 +203,14 @@ public class InputFragment extends Fragment implements View.OnClickListener{
 
                        DocumentSnapshot doc = task.getResult();
                        if(doc.exists()){
-                           stop =false;
-                           Toast.makeText(getActivity(), "udah ada id"+UID, Toast.LENGTH_SHORT).show();
-
+                           //ini buat random lagi
+                           start = start + 1;
+                           Toast.makeText(getActivity(), "udah ada id " + UID + ", UID baru anda = " + start, Toast.LENGTH_SHORT).show();
+                           //hasil random dimasukin ke kelas ini lagi buat di loop
+                           getUID(start);
                        } else {
-                           stop = true;
                            id = UID;
-                           Toast.makeText(getActivity(), "unik id "+id, Toast.LENGTH_SHORT).show();
+                           Toast.makeText(getActivity(), "unik id " + id, Toast.LENGTH_SHORT).show();
                        }
                     }
 
