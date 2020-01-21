@@ -28,9 +28,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -63,7 +65,7 @@ public class KeranjangFragment extends Fragment implements View.OnClickListener 
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReferenceFromUrl("gs://test-f3c56.appspot.com");
     private FirebaseAuth mAuth;
-    FirebaseFirestore db;
+    FirebaseFirestore db= FirebaseFirestore.getInstance();
 
 
     @Nullable
@@ -71,13 +73,15 @@ public class KeranjangFragment extends Fragment implements View.OnClickListener 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_keranjang,container,false);
         totalHarga = view.findViewById(R.id.tv_total);
+        currentuserUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        arrayReload();
         bayarKeranjang=view.findViewById(R.id.btn_bayar);
         bayarKeranjang.setOnClickListener(this);
         //getUID
-        currentuserUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
         Query query = FirebaseFirestore.getInstance()
-                .collection("Keranjang")
+                .collection("NewKeranjang")
                 .whereEqualTo("uiduser",currentuserUID)
                 .whereEqualTo("check", true)
                 .whereEqualTo("keyPembelian", "kosong")
@@ -117,9 +121,9 @@ public class KeranjangFragment extends Fragment implements View.OnClickListener 
 
 
 
-                keranjangHarga.add(position,hargaKelas);
-                calculateTotal();
-                holder.inputKeranjang(id,grupchat,position);
+
+
+
                 holder.delete(position,id);
                 holder.setText(judul,tanggal,image,harga,detail);
             }
@@ -136,11 +140,43 @@ public class KeranjangFragment extends Fragment implements View.OnClickListener 
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
         return view;
     }
 
+    public void arrayReload(){
 
+        CollectionReference collectionReferences = db.collection("NewKeranjang");
+        Query query = collectionReferences
+                .whereEqualTo("uiduser",currentuserUID)
+                .whereEqualTo("check", true)
+                .whereEqualTo("keyPembelian", "kosong");
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
+                        String hargas = documentSnapshot.getString("harga");
+                        int harga = Integer.parseInt(hargas);
+                        keranjangHarga.add(harga);
+
+                        String uidKeranjang = documentSnapshot.getString("id");
+                        boolean faq = documentSnapshot.getBoolean("grupchat");
+                        Keranjang keranjang = new Keranjang(uidKeranjang,faq);
+                        keranjang.setUidKeranjang(uidKeranjang);
+                        keranjang.setFaq(faq);
+
+                        keranjangList.add(keranjang);
+                        calculateTotal();
+                    }
+                }
+            }
+        });
+
+    }
     public  void calculateTotal(){
+
+
         int i=0;
         total=0;
         int k = keranjangHarga.size();
@@ -216,17 +252,26 @@ public class KeranjangFragment extends Fragment implements View.OnClickListener 
                 @Override
                 public void onClick(View view) {
 
-                    keranjangHarga.remove(position);
-                    keranjangList.remove(position);
-                    calculateTotal();
-                    DocumentReference keranjang = db.collection("Keranjang")
+
+
+
+                    DocumentReference keranjang = db.collection("NewKeranjang")
                             .document(id);
                     keranjang.update("check",false)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Toast.makeText(getActivity(), "Delete", Toast.LENGTH_LONG).show();
+                                    if (keranjangList.size()>1) {
+                                        keranjangHarga.clear();
+                                        keranjangList.clear();
+                                        arrayReload();
+                                    } else {
 
+                                        keranjangHarga.clear();
+                                        keranjangList.clear();
+                                        totalHarga.setText("Rp 0");
+                                    }
                                 }
                             });
 
@@ -243,14 +288,7 @@ public class KeranjangFragment extends Fragment implements View.OnClickListener 
 
         }
 
-        void inputKeranjang(final String uidKeranjang, boolean faq,final  int position){
 
-            Keranjang keranjang = new Keranjang(uidKeranjang,faq);
-            keranjang.setUidKeranjang(uidKeranjang);
-            keranjang.setFaq(faq);
-
-            keranjangList.add(position,keranjang);
-        }
 
 
     }
